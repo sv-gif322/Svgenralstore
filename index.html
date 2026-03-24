@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mera General Store - Advanced</title>
+  <style>
+    body { font-family: Arial; margin: 0; background: #f5f5f5; }
+    header { background: #2c3e50; color: white; padding: 15px; text-align: center; }
+    nav { background: #34495e; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 10px; text-decoration: none; font-weight: bold; }
+    .container { padding: 20px; }
+    .product { background: white; padding: 15px; margin: 10px; border-radius: 8px; display: inline-block; width: 200px; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+    .btn { display: inline-block; padding: 8px 12px; background: green; color: white; text-decoration: none; border-radius: 5px; margin-top: 5px; cursor:pointer; }
+    #cart { position: fixed; right: 10px; top: 10px; background: white; padding: 10px; border-radius: 8px; width: 250px; box-shadow: 0 0 5px rgba(0,0,0,0.3); }
+    footer { background: #2c3e50; color: white; text-align: center; padding: 10px; margin-top: 20px; }
+  </style>
+</head>
+<body><header>
+  <h1>Mera General Store</h1>
+  <p>Online Order System</p>
+</header><nav>
+  <a href="#">Home</a>
+  <a href="#products">Products</a>
+  <a href="#contact">Contact</a>
+</nav><div id="cart">
+  <h3>🛒 Cart</h3>
+  <ul id="cartItems"></ul>
+  <p><b>Total: ₹<span id="total">0</span></b></p>
+  <button onclick="orderWhatsApp()">Order on WhatsApp</button>
+</div><div class="container" id="products">
+  <h2>Products</h2>  <div class="product">
+    <h3>Chawal</h3>
+    <p>₹50</p>
+    <button class="btn" onclick="addToCart('Chawal',50)">Add to Cart</button>
+  </div>  <div class="product">
+    <h3>Daal</h3>
+    <p>₹80</p>
+    <button class="btn" onclick="addToCart('Daal',80)">Add to Cart</button>
+  </div>  <div class="product">
+    <h3>Sabun</h3>
+    <p>₹25</p>
+    <button class="btn" onclick="addToCart('Sabun',25)">Add to Cart</button>
+  </div></div><div class="container" id="contact">
+  <h2>Contact</h2>
+  <p>Mobile: 8809251935</p>
+</div><footer>
+  <p>© 2026 Mera General Store</p>
+</footer><script>
+let cart = [];
+let total = 0;
+
+function addToCart(name, price){
+  cart.push(name + ' ₹' + price);
+  total += price;
+  displayCart();
+}
+
+function displayCart(){
+  let list = document.getElementById('cartItems');
+  list.innerHTML = '';
+  cart.forEach(item => {
+    let li = document.createElement('li');
+    li.innerText = item;
+    list.appendChild(li);
+  });
+  document.getElementById('total').innerText = total;
+}
+
+function orderWhatsApp(){
+  let message = 'Order:\n' + cart.join('\n') + '\nTotal: ₹' + total;
+  window.open('https://wa.me/919876543210?text=' + encodeURIComponent(message));
+}
+</script></body>
+</html>
